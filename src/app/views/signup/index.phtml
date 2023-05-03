@@ -1,0 +1,30 @@
+<h2>Sign Up</h2>
+<br>
+<?php echo $this->tag->form("signup/add"); ?>
+    <label for="name">Name:
+        <input type="text" name="name">
+    </label><br><br>
+    <label for="password">Password:
+        <input type="text" name="password">
+    </label><br><br>
+    <label for="email">Email:
+        <input type="text" name="email">
+    </label><br><br>
+    <label for="role">Type:
+        <select name="role">
+            <option value="">-Select-</option>
+            <option value="user">User</option>
+            <option value="manager">Manager</option>
+            <option value="admin">Admin</option>
+        </select>
+    </label><br><br>
+
+    <input class="btn btn-primary" type="submit" value="Add">
+</form>
+<br>
+<?php
+echo $this->tag->linkTo([
+    '/',
+    'Back',
+    'class' => 'btn btn-primary'
+]);
