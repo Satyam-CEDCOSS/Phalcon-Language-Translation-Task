@@ -2,6 +2,7 @@
 
 namespace MyApp\Listener;
 
+use Phalcon\Di\Injectable;
 use Phalcon\Acl\Adapter\Memory;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\Application;
@@ -9,11 +10,11 @@ use Phalcon\Events\Event;
 
 session_start();
 
-class Aclistener
+class Aclistener extends Injectable
 {
     public function beforeHandleRequest(Event $events, Application $app, Dispatcher $dis)
     {
-       
+       $di = $this->getDI();
         $acl = new Memory();
 
         $acl->addRole('manager');
@@ -97,7 +98,7 @@ class Aclistener
         print_r($type);
         $check = $acl->isAllowed($type, $controle, $action);
         if (!$check) {
-            echo "Access Denied";
+            echo $di->get('locale')->_('Access Denied');
             die;
         }
     }

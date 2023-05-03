@@ -5,6 +5,8 @@ use Phalcon\Translate\Adapter\NativeArray;
 use Phalcon\Translate\InterpolatorFactory;
 use Phalcon\Translate\TranslateFactory;
 
+session_start();
+
 class IndexController extends Controller
 {
     public function indexAction()
@@ -23,12 +25,13 @@ class IndexController extends Controller
     public function getAction(): NativeArray
     {
         // Ask browser what is the best language
+        $_SESSION['lang'] = $_POST['lang'];
         if ($_POST['lang']) {
             $language = $_POST['lang'];
         }
         $messages = [];
         
-        $translationFile = 'app/messages/' . $language . '.php';
+        $translationFile = APP_PATH . '/messages/'.$language.'.php';
 
         if (true !== file_exists($translationFile)) {
             $translationFile = APP_PATH . '/messages/'.$language.'.php';

@@ -29,7 +29,8 @@ $loader->registerDirs(
 
 $loader->registerNamespaces(
     [
-        'MyApp\Listener'=>APP_PATH .'/handlers/'
+        'MyApp\Listener'=>APP_PATH .'/handlers/',
+        'MyApp\Component'=>APP_PATH .'/components/'
     ]
 );
 
@@ -78,6 +79,10 @@ $container->set(
     },
     true
 );
+
+use MyApp\Component\Locale;
+
+$container->set('locale', (new Locale())->getTranslator());
 
 $container->set(
     'session',
